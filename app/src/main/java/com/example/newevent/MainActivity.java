@@ -97,15 +97,15 @@ public class MainActivity extends AppCompatActivity {
                     event_data_recyclerview.setAdapter(mainAdapter);
                     JSONArray eventArray = obj.getJSONArray("event");
 
-                        for (int j = 0; j < eventArray.length(); j++) {
-                            JSONObject object = eventArray.getJSONObject(j);
+//                        for (int j = 0; j < eventArray.length(); j++) {
+                            JSONObject object = eventArray.getJSONObject(i);
                             String title = object.getString("title");
                             String venue_name = object.getString("venue_name");
                             String small_images = object.getString("small_image");
 
                             imagelists.add(new Imagelist(title, venue_name, small_images));
 
-                        }
+//                        }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
