@@ -15,6 +15,15 @@
             android:layout_height="90dp"
             android:scaleType="fitXY" />
 
+        <ImageView
+            android:id="@+id/img_rating"
+            android:layout_width="55dp"
+            android:layout_height="25dp"
+android:layout_marginLeft="70dp"
+            android:src="@drawable/himal"
+
+            ></ImageView>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="120dp"

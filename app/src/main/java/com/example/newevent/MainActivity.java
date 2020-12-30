@@ -45,15 +45,7 @@ public class MainActivity extends AppCompatActivity {
         event_data_recyclerview.setLayoutManager(manager);
         event_data_recyclerview.setHasFixedSize(true);
         requestQueue = Volley.newRequestQueue(this);
-        imagelists=new ArrayList<>();
-        //South_recycler=findViewById(R.id.child_recycler);
-
-      //  GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-//        South_recycler.setLayoutManager(gridLayoutManager);
-//        South_recycler.setHasFixedSize(true);
-
-
-
+        imagelists = new ArrayList<>();
         mEventname = new ArrayList<>();
         imagelists = new ArrayList<>();
         getdatafromserver();
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-               // JSONObject objMsain=new JSONObject(response);
+                // JSONObject objMsain=new JSONObject(response);
                 try {
 
                     JSONArray otherArray = response.getJSONArray("others");
@@ -94,41 +86,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDataForSouth(JSONArray otherArray) {
         for (int i = 0; i < otherArray.length(); i++) {
-{
+            {
 
-    try {
-        JSONObject obj = otherArray.getJSONObject(i);
-        String name = obj.getString("name");
-        String about = obj.getString("about");
-        mEventname.add(new EventNAme(name, about,imagelists));
+                try {
+                    JSONObject obj = otherArray.getJSONObject(i);
+                    String name = obj.getString("name");
+                    String about = obj.getString("about");
+                    mEventname.add(new EventNAme(name, about, imagelists));
+                    mainAdapter = new MainAdapter(getApplicationContext(), mEventname);
+                    event_data_recyclerview.setAdapter(mainAdapter);
+                    JSONArray eventArray = obj.getJSONArray("event");
 
+                        for (int j = 0; j < eventArray.length(); j++) {
+                            JSONObject object = eventArray.getJSONObject(j);
+                            String title = object.getString("title");
+                            String venue_name = object.getString("venue_name");
+                            String small_images = object.getString("small_image");
 
+                            imagelists.add(new Imagelist(title, venue_name, small_images));
 
-        // South_recycler.setAdapter(imageListAdapter);
-        mainAdapter = new MainAdapter(getApplicationContext(),mEventname);
+                        }
 
-        event_data_recyclerview.setAdapter(mainAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        JSONArray eventArray = obj.getJSONArray("event");
-        for (int j=0;j<eventArray.length();j++){
-            JSONObject object = eventArray.getJSONObject(j);
-            String title =object.getString("title");
-            String venue_name =object.getString("venue_name");
-            String small_images=object.getString("small_image");
-            imagelists.add(new Imagelist(title,venue_name,small_images));
+            }
+
 
         }
 
-    } catch (JSONException e) {
-        e.printStackTrace();
     }
-
-}
-
-        }
-
-
-    }
-
 }
 

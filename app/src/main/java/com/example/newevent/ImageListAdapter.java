@@ -45,6 +45,7 @@ JSONArray images;
         holder.list_text.setText(name);
         holder.venue_name.setText(about);
         Picasso.with(context).load(newcollection.getSmall_image()).into(holder.list_image);
+       // Picasso.with(context).load(newcollection.getSmall_image()).into(holder.img_rating);
     }
 
     @Override
@@ -53,12 +54,13 @@ JSONArray images;
     }
 
     public class ListHolder extends RecyclerView.ViewHolder{
-        ImageView list_image;
+        ImageView list_image,img_rating;
         TextView list_text;
         TextView venue_name;
         public ListHolder(@NonNull View itemView) {
             super(itemView);
             list_image=itemView.findViewById(R.id.image_view);
+            img_rating=itemView.findViewById(R.id.img_rating);
             list_text=itemView.findViewById(R.id.title);
             venue_name=itemView.findViewById(R.id.venue_name);
         }
