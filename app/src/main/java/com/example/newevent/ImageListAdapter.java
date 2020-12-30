@@ -19,11 +19,11 @@ import java.util.ArrayList;
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ListHolder> {
 public Context context;
 String [] data;
-    private ArrayList<Imagelist> eventdata;
+    private ArrayList<Imagelist> neventdata ;
 JSONArray images;
     public ImageListAdapter(Context data, ArrayList<Imagelist> mEventname) {
         this.context = data;
-        this.eventdata = mEventname;
+        this.neventdata = mEventname;
     }
 
 
@@ -39,7 +39,7 @@ JSONArray images;
 
     @Override
     public void onBindViewHolder(@NonNull ListHolder holder, int position) {
-        Imagelist newcollection = eventdata.get(position);
+        Imagelist newcollection = neventdata.get(position);
         String name = newcollection.getTitle();
         String about = newcollection.getVenue_name();
         holder.list_text.setText(name);
@@ -49,7 +49,7 @@ JSONArray images;
 
     @Override
     public int getItemCount() {
-        return eventdata.size();
+        return neventdata.size();
     }
 
     public class ListHolder extends RecyclerView.ViewHolder{

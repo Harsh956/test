@@ -4,6 +4,7 @@ package com.example.newevent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -45,13 +46,12 @@ public class MainActivity extends AppCompatActivity {
         event_data_recyclerview.setHasFixedSize(true);
         requestQueue = Volley.newRequestQueue(this);
         imagelists=new ArrayList<>();
-        /*South_recycler=findViewById(R.id.South_recycler);
-        listAdapter=new ListAdapter(this,images);
-        //South_recycler.setNestedScrollingEnabled(false);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-        South_recycler.setLayoutManager(gridLayoutManager);
-        South_recycler.setHasFixedSize(true);
-*/
+        //South_recycler=findViewById(R.id.child_recycler);
+
+      //  GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
+//        South_recycler.setLayoutManager(gridLayoutManager);
+//        South_recycler.setHasFixedSize(true);
+
 
 
         mEventname = new ArrayList<>();
@@ -64,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+               // JSONObject objMsain=new JSONObject(response);
                 try {
-                    // JSONObject objMsain=new JSONObject(response);
+
                     JSONArray otherArray = response.getJSONArray("others");
 
 
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+
                 error.printStackTrace();
                 Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -91,26 +94,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDataForSouth(JSONArray otherArray) {
         for (int i = 0; i < otherArray.length(); i++) {
-            try {
+{
 
-                JSONObject obj = otherArray.getJSONObject(i);
-                obj = otherArray.getJSONObject(i);
-                JSONArray jsonArray = obj.getJSONArray("event");
-                imageListAdapter = new ImageListAdapter(getApplicationContext(), imagelists);
-                String name = obj.getString("name");
-                String about = obj.getString("about");
-                mEventname.add(new EventNAme(name, about,imagelists));
-               // imageListAdapter = new ImageListAdapter(getApplicationContext(), jsonArray);
-//listAdapter=new ListAdapter(getApplicationContext(),jsonArray);
-                // South_recycler.setAdapter(listAdapter);
-                mainAdapter = new MainAdapter(getApplicationContext(), mEventname);
-
-                event_data_recyclerview.setAdapter(mainAdapter);
+    try {
+        JSONObject obj = otherArray.getJSONObject(i);
+        String name = obj.getString("name");
+        String about = obj.getString("about");
+        mEventname.add(new EventNAme(name, about,imagelists));
 
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+        // South_recycler.setAdapter(imageListAdapter);
+        mainAdapter = new MainAdapter(getApplicationContext(),mEventname);
+
+        event_data_recyclerview.setAdapter(mainAdapter);
+
+        JSONArray eventArray = obj.getJSONArray("event");
+        for (int j=0;j<eventArray.length();j++){
+            JSONObject object = eventArray.getJSONObject(j);
+            String title =object.getString("title");
+            String venue_name =object.getString("venue_name");
+            String small_images=object.getString("small_image");
+            imagelists.add(new Imagelist(title,venue_name,small_images));
+
+        }
+
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+
+}
 
         }
 

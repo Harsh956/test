@@ -2,6 +2,7 @@ package com.example.newevent;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,12 +14,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.widget.GridLayout.HORIZONTAL;
+
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private Context data;
 
     private ArrayList<EventNAme> eventdata;
-private ArrayList<Imagelist> imagelists;
 
     public MainAdapter(Context data, ArrayList<EventNAme> mEventname) {
         this.data = data;
@@ -48,7 +50,8 @@ private ArrayList<Imagelist> imagelists;
 
     private void setCatItemRecycler(RecyclerView child_recycler, ArrayList<Imagelist> eventdata) {
         ImageListAdapter itemRecyclerAdapter = new ImageListAdapter(data,eventdata );
-        child_recycler.setLayoutManager(new LinearLayoutManager(data, RecyclerView.HORIZONTAL, false));
+
+        child_recycler.setLayoutManager(new GridLayoutManager(data, 3));
         child_recycler.setAdapter(itemRecyclerAdapter);
 
     }

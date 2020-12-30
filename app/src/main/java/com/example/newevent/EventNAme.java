@@ -12,6 +12,7 @@ public class EventNAme {
     public EventNAme(String name, String about,ArrayList<Imagelist> eventdata) {
         this.name = name;
         this.about = about;
+        this.eventdata=eventdata;
 
     }
 
