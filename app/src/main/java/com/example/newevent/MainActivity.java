@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     String Url = "http://thepartymantra.com/api/home";
     MainAdapter msoutheventadapter;
     RequestQueue requestQueue;
-    private ArrayList<EventNAme> mEventname;
-    private ArrayList<Imagelist> imagelists;
-    private ArrayList<BannerImages> bannerImages;
+    private ArrayList<ModelEventName> mEventname;
+    private ArrayList<ModelImageName> imagelists;
+    private ArrayList<ModelBannerName> bannerImages;
     private MainAdapter mainAdapter;
 
-    private ImageListAdapter imageListAdapter;
+    private ImageDataAdapter imageListAdapter;
     JSONArray images;
 
     @Override
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = otherArray.getJSONObject(i);
                     String name = obj.getString("name");
                     String about = obj.getString("about");
-                    mEventname.add(new EventNAme(name, about, imagelists, bannerImages));
+                    mEventname.add(new ModelEventName(name, about, imagelists, bannerImages));
                     mainAdapter = new MainAdapter(getApplicationContext(), mEventname);
                     event_data_recyclerview.setAdapter(mainAdapter);
                     JSONArray eventArray = obj.getJSONArray("event");
@@ -100,14 +100,18 @@ public class MainActivity extends AppCompatActivity {
                     String title = object.getString("title");
                     String venue_name = object.getString("venue_name");
                     String small_images = object.getString("small_image");
-                    imagelists.add(new Imagelist(title, venue_name, small_images));
+                    imagelists.add(new ModelImageName(title, venue_name, small_images));
                     JSONObject object1 = otherArray.getJSONObject(i);
                     JSONArray bannerarray = object1.getJSONArray("banners");
-                    for (int j=0; j < bannerarray.length(); j++){
-                        JSONObject baner = bannerarray.getJSONObject(j);
-                        String image = baner.getString("image");
-                        bannerImages.add(new BannerImages(image));
+                        for (int j=0; j < bannerarray.length(); j++){
+                            JSONObject baner = bannerarray.getJSONObject(j);
+                            String image = baner.getString("image");
+                            bannerImages.add(new ModelBannerName(image,bannerarray.length()));
+
+
+
                     }
+
 
 
 

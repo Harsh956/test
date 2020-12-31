@@ -2,14 +2,14 @@ package com.example.newevent;
 
 import java.util.ArrayList;
 
-public class EventNAme {
+public class ModelEventName {
 
 
     private String  name;
     private String about;
-    private ArrayList<Imagelist> eventdata;
-    private ArrayList<BannerImages> bannerImages;
-    public EventNAme(String name, String about,ArrayList<Imagelist> eventdata,ArrayList<BannerImages> bannerImages) {
+    private ArrayList<ModelImageName> eventdata;
+    private ArrayList<ModelBannerName> bannerImages;
+    public ModelEventName(String name, String about, ArrayList<ModelImageName> eventdata, ArrayList<ModelBannerName> bannerImages) {
         this.name = name;
         this.about = about;
         this.eventdata=eventdata;
@@ -17,14 +17,14 @@ public class EventNAme {
 
     }
 
-    public ArrayList<Imagelist> getEventdata() {
+    public ArrayList<ModelImageName> getEventdata() {
         return eventdata;
     }
-    public ArrayList<BannerImages> getBannerImages() {
+    public ArrayList<ModelBannerName> getBannerImages() {
         return bannerImages;
     }
 
-    public void setEventdata(ArrayList<Imagelist> eventdata) {
+    public void setEventdata(ArrayList<ModelImageName> eventdata) {
         this.eventdata = eventdata;
     }
 

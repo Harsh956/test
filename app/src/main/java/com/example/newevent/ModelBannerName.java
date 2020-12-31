@@ -2,11 +2,12 @@ package com.example.newevent;
 
 import java.util.ArrayList;
 
-public class BannerImages {
+public class ModelBannerName {
     private String image;
-    private ArrayList<BannerImages> getBannerImages;
-    public BannerImages(String image) {
+    private int getBannerImages;
+    public ModelBannerName(String image,int getBannerImages) {
         this.image = image;
+        this.getBannerImages=getBannerImages;
     }
 
 

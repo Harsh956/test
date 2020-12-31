@@ -16,12 +16,12 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 
-public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ListHolder> {
+public class ImageDataAdapter extends RecyclerView.Adapter<ImageDataAdapter.ListHolder> {
 public Context context;
 String [] data;
-    private ArrayList<Imagelist> neventdata ;
+    private ArrayList<ModelImageName> neventdata ;
 JSONArray images;
-    public ImageListAdapter(Context data, ArrayList<Imagelist> mEventname) {
+    public ImageDataAdapter(Context data, ArrayList<ModelImageName> mEventname) {
         this.context = data;
         this.neventdata = mEventname;
     }
@@ -39,7 +39,7 @@ JSONArray images;
 
     @Override
     public void onBindViewHolder(@NonNull ListHolder holder, int position) {
-        Imagelist newcollection = neventdata.get(position);
+        ModelImageName newcollection = neventdata.get(position);
         String name = newcollection.getTitle();
         String about = newcollection.getVenue_name();
         holder.list_text.setText(name);

@@ -2,14 +2,14 @@ package com.example.newevent;
 
 import java.util.ArrayList;
 
-public class Imagelist {
+public class ModelImageName {
     private String title;
     private String venue_name;
     private String small_image;
     private String image;
 
 
-    public Imagelist(String title, String venue_name, String small_image) {
+    public ModelImageName(String title, String venue_name, String small_image) {
         this.title = title;
         this.venue_name = venue_name;
         this.small_image = small_image;
