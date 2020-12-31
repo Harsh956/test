@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class ViewPagerAdapter extends PagerAdapter {
 
@@ -22,15 +24,15 @@ public class ViewPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     JSONArray banner;
     private JSONArray images ;
-
-    public ViewPagerAdapter(Context context, JSONArray mimages ) {
+    private ArrayList<BannerImages> imagelists;
+    public ViewPagerAdapter(Context context, ArrayList<BannerImages> imagelists ) {
         this.context = context;
-        this.images=mimages;
+        this.imagelists=imagelists;
     }
 
     @Override
     public int getCount() {
-        return images.length();
+        return imagelists.size();
     }
 
     @Override
@@ -45,29 +47,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.banner_layout, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.banner_scroll_images);
-        try {
-            JSONObject othersObject = images.getJSONObject(position);
-            Picasso.with(context).load(othersObject.getString("image")).into(imageView);
-            Picasso.with(context).load(othersObject.getString("image")).into(imageView);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-       /* view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(position == 0){
-                    Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
-                } else if(position == 1){
-                    Toast.makeText(context, "Slide 2 Clicked", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Slide 3 Clicked", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });*/
-
+        BannerImages newcollection = imagelists.get(position);
+        Picasso.with(context).load(newcollection.getImage()).into(imageView);
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);
         return view;
@@ -76,7 +57,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
         ViewPager vp = (ViewPager) container;
         View view = (View) object;
         vp.removeView(view);

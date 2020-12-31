@@ -60,7 +60,7 @@ JSONArray images;
         public ListHolder(@NonNull View itemView) {
             super(itemView);
             list_image=itemView.findViewById(R.id.image_view);
-            img_rating=itemView.findViewById(R.id.img_rating);
+           // img_rating=itemView.findViewById(R.id.img_rating);
             list_text=itemView.findViewById(R.id.title);
             venue_name=itemView.findViewById(R.id.venue_name);
         }

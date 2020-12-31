@@ -4,7 +4,6 @@ package com.example.newevent;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     private ArrayList<EventNAme> mEventname;
     private ArrayList<Imagelist> imagelists;
+    private ArrayList<BannerImages> bannerImages;
     private MainAdapter mainAdapter;
 
     private ImageListAdapter imageListAdapter;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         event_data_recyclerview.setLayoutManager(manager);
         event_data_recyclerview.setHasFixedSize(true);
         requestQueue = Volley.newRequestQueue(this);
-        imagelists = new ArrayList<>();
+        bannerImages = new ArrayList<>();
         mEventname = new ArrayList<>();
         imagelists = new ArrayList<>();
         getdatafromserver();
@@ -92,20 +92,25 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = otherArray.getJSONObject(i);
                     String name = obj.getString("name");
                     String about = obj.getString("about");
-                    mEventname.add(new EventNAme(name, about, imagelists));
+                    mEventname.add(new EventNAme(name, about, imagelists, bannerImages));
                     mainAdapter = new MainAdapter(getApplicationContext(), mEventname);
                     event_data_recyclerview.setAdapter(mainAdapter);
                     JSONArray eventArray = obj.getJSONArray("event");
+                    JSONObject object = eventArray.getJSONObject(i);
+                    String title = object.getString("title");
+                    String venue_name = object.getString("venue_name");
+                    String small_images = object.getString("small_image");
+                    imagelists.add(new Imagelist(title, venue_name, small_images));
+                    JSONObject object1 = otherArray.getJSONObject(i);
+                    JSONArray bannerarray = object1.getJSONArray("banners");
+                    for (int j=0; j < bannerarray.length(); j++){
+                        JSONObject baner = bannerarray.getJSONObject(j);
+                        String image = baner.getString("image");
+                        bannerImages.add(new BannerImages(image));
+                    }
 
-//                        for (int j = 0; j < eventArray.length(); j++) {
-                            JSONObject object = eventArray.getJSONObject(i);
-                            String title = object.getString("title");
-                            String venue_name = object.getString("venue_name");
-                            String small_images = object.getString("small_image");
 
-                            imagelists.add(new Imagelist(title, venue_name, small_images));
 
-//                        }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

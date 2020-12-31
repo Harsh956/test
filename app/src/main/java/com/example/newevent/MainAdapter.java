@@ -1,7 +1,9 @@
 package com.example.newevent;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,20 +15,32 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.widget.GridLayout.HORIZONTAL;
 
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+
+
+
     private Context data;
 
     private ArrayList<EventNAme> eventdata;
+    private ArrayList<BannerImages> imagelists;
 
     public MainAdapter(Context data, ArrayList<EventNAme> mEventname) {
         this.data = data;
         this.eventdata = mEventname;
+
     }
 
+    public MainAdapter(ArrayList<BannerImages> imagelists) {
+
+
+        this.imagelists = imagelists;
+    }
 
     @NonNull
     @Override
@@ -39,22 +53,37 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EventNAme newcollection = eventdata.get(position);
         String name = newcollection.getName();
         String about = newcollection.getAbout();
         holder.event_name.setText(name);
         holder.event_about.setText(about);
-        setCatItemRecycler(holder.child_recycler, eventdata.get(position).getEventdata());
+        setIventItemRecycler(holder.child_recycler, eventdata.get(position).getEventdata());
+       setViewPager(holder.view_pager, eventdata.get(position).getBannerImages());
+
+        //setBannerItemPager(holder.view_pager, eventdata.get(position.getpagerData()));
     }
 
-    private void setCatItemRecycler(RecyclerView child_recycler, ArrayList<Imagelist> eventdata) {
-        ImageListAdapter itemRecyclerAdapter = new ImageListAdapter(data,eventdata );
+   private void setViewPager(ViewPager view_pager, ArrayList<BannerImages> eventdata) {
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(data, eventdata);
+        view_pager.setAdapter(viewPagerAdapter);
+        view_pager.setVisibility(View.VISIBLE);
+       Timer timer = new Timer();
+      // timer.scheduleAtFixedRate(new MyTimerTask(), 3000, 4000);
+
+    }
+
+    private void setIventItemRecycler(RecyclerView child_recycler, ArrayList<Imagelist> eventdata) {
+        ImageListAdapter itemRecyclerAdapter = new ImageListAdapter(data, eventdata);
 
         child_recycler.setLayoutManager(new GridLayoutManager(data, 3));
         child_recycler.setAdapter(itemRecyclerAdapter);
 
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -64,7 +93,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView event_name;
         TextView event_about;
-        ImageView image_view, image_slide;
+        ViewPager view_pager;
         RecyclerView child_recycler;
 
         public ViewHolder(View v) {
@@ -73,10 +102,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
             event_about = v.findViewById(R.id.tv_South_about);
             child_recycler = v.findViewById(R.id.child_recycler);
-
+            view_pager = v.findViewById(R.id.viewPager);
 
 
         }
     }
+
+
+
 
 }

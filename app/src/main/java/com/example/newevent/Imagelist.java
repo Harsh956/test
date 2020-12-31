@@ -1,16 +1,22 @@
 package com.example.newevent;
 
+import java.util.ArrayList;
+
 public class Imagelist {
     private String title;
     private String venue_name;
     private String small_image;
+    private String image;
 
 
     public Imagelist(String title, String venue_name, String small_image) {
         this.title = title;
         this.venue_name = venue_name;
         this.small_image = small_image;
+
     }
+
+
 
     public String getTitle() {
         return title;
@@ -35,4 +41,7 @@ public class Imagelist {
     public void setSmall_image(String small_image) {
         this.small_image = small_image;
     }
+
+
+
 }

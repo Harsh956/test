@@ -15,14 +15,14 @@
             android:layout_height="90dp"
             android:scaleType="fitXY" />
 
-        <ImageView
-            android:id="@+id/img_rating"
-            android:layout_width="55dp"
-            android:layout_height="25dp"
-android:layout_marginLeft="70dp"
-            android:src="@drawable/himal"
+        <!-- <ImageView
+             android:id="@+id/img_rating"
+             android:layout_width="55dp"
+             android:layout_height="25dp"
+ android:layout_marginLeft="70dp"
+             android:src="@drawable/himal"
 
-            ></ImageView>
+             ></ImageView>-->
 
         <TextView
             android:id="@+id/title"
@@ -50,11 +50,10 @@ android:layout_marginLeft="70dp"
 
         <ImageView
 
+            android:id="@+id/image_slide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/image_slide"
-            android:layout_below="@id/venue_name"
-            >
+            android:layout_below="@id/venue_name">
 
         </ImageView>
     </RelativeLayout>
